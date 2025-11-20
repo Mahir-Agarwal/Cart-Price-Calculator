@@ -3,42 +3,42 @@ const products = [
     {
         id: 1,
         name: "Cyberpunk Headset",
-        price: 129.99,
+        price: 9999.00,
         image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         category: "Audio"
     },
     {
         id: 2,
         name: "Neon Mechanical Keyboard",
-        price: 199.50,
+        price: 15999.00,
         image: "https://images.unsplash.com/photo-1587829741301-dc798b91a603?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         category: "Peripherals"
     },
     {
         id: 3,
         name: "Holographic Smartwatch",
-        price: 299.00,
+        price: 23999.00,
         image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         category: "Wearables"
     },
     {
         id: 4,
         name: "Quantum Gaming Mouse",
-        price: 89.99,
+        price: 6999.00,
         image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         category: "Peripherals"
     },
     {
         id: 5,
         name: "VR Reality Glasses",
-        price: 450.00,
+        price: 34999.00,
         image: "https://images.unsplash.com/photo-1622979135225-d2ba269fb1bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         category: "VR"
     },
     {
         id: 6,
         name: "Portable Fusion Reactor",
-        price: 999.99,
+        price: 79999.00,
         image: "https://images.unsplash.com/photo-1550009158-9ebf69173e03?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
         category: "Energy"
     }
@@ -75,7 +75,7 @@ function renderProducts() {
                 <h3>${product.name}</h3>
                 <p>${product.category}</p>
                 <div class="product-footer">
-                    <span class="price">$${product.price.toFixed(2)}</span>
+                    <span class="price">₹${product.price.toLocaleString('en-IN')}</span>
                     <button class="add-btn" onclick="addToCart(${product.id})">
                         <i class="fa-solid fa-plus"></i> Add
                     </button>
@@ -86,7 +86,7 @@ function renderProducts() {
 }
 
 // Add to Cart
-window.addToCart = function(productId) {
+window.addToCart = function (productId) {
     const product = products.find(p => p.id === productId);
     const existingItem = cart.find(item => item.id === productId);
 
@@ -100,7 +100,7 @@ window.addToCart = function(productId) {
     }
 
     updateCartUI();
-    
+
     // Optional: Open cart on add (mobile friendly)
     if (window.innerWidth <= 900) {
         cartSidebar.classList.add('active');
@@ -108,13 +108,13 @@ window.addToCart = function(productId) {
 };
 
 // Remove from Cart
-window.removeFromCart = function(productId) {
+window.removeFromCart = function (productId) {
     cart = cart.filter(item => item.id !== productId);
     updateCartUI();
 };
 
 // Update Quantity
-window.updateQuantity = function(productId, change) {
+window.updateQuantity = function (productId, change) {
     const item = cart.find(item => item.id === productId);
     if (item) {
         item.quantity += change;
@@ -146,7 +146,7 @@ function updateCartUI() {
                 <img src="${item.image}" alt="${item.name}" class="cart-item-img">
                 <div class="cart-item-details">
                     <div class="cart-item-title">${item.name}</div>
-                    <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+                    <div class="cart-item-price">₹${(item.price * item.quantity).toLocaleString('en-IN')}</div>
                     <div class="cart-item-controls">
                         <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
                         <span class="qty-display">${item.quantity}</span>
@@ -165,9 +165,9 @@ function updateCartUI() {
     const tax = subtotal * TAX_RATE;
     const total = subtotal + tax;
 
-    subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-    taxElement.textContent = `$${tax.toFixed(2)}`;
-    totalElement.textContent = `$${total.toFixed(2)}`;
+    subtotalElement.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+    taxElement.textContent = `₹${tax.toLocaleString('en-IN')}`;
+    totalElement.textContent = `₹${total.toLocaleString('en-IN')}`;
 }
 
 // Event Listeners
